@@ -10,19 +10,43 @@
 // Init of variables.
 
 95 D1=0:P1=0
-// D1 is starved people last year.
+// D1 is total starved people.
 // P1 is average of people starved / year in percent.
 
 100 Z=0:P=95:S=2800:H=3000:E=H-S
+// Z is the current year
+// P is the current population
+// S is number of stored bushels
+// H is harvested bushels
+// E is bushels eaten by rats
+
 110 Y=3:A=H/Y:I=5:Q=1
+// Y is harvest per acre
+// A is acres. acres = total harvest / harvest per acre
+// I is imigrants last year.
+// Q is here a flag for triggering a plague. Later used for querys.
+
 210 D=0
+// People starved last year.
+
+// Print yearly report.
+
 215 PRINT:PRINT:PRINT "HAMURABI:  I BEG TO REPORT TO YOU,":Z=Z+1
 217 PRINT "IN YEAR"Z","D"PEOPLE STARVED,"I"CAME TO THE CITY."
+// Increase year by 1 and report population changes.
+
 218 P=P+I
+// Add imigrants to total population.
+
+// Plague
+
 227 IF Q>0 THEN 230
 228 P=INT(P/2)
 229 PRINT "A HORRIBLE PLAGUE STRUCK!  HALF THE PEOPLE DIED."
 230 PRINT "POPULATION IS NOW"P
+// If Q flag is not greater than 0, trigger plague and half population.
+// Report population.
+
 232 PRINT "THE CITY NOW OWNS"A"ACRES."
 235 PRINT "YOU HARVESTED"Y"BUSHELS PER ACRE."
 250 PRINT "RATS ATE"E"BUSHELS."
