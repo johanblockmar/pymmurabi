@@ -51,17 +51,41 @@
 235 PRINT "YOU HARVESTED"Y"BUSHELS PER ACRE."
 250 PRINT "RATS ATE"E"BUSHELS."
 260 PRINT "YOU NOW HAVE"S"BUSHELS IN STORE.":PRINT
+// Report on acres and harvest.
+
 270 IF Z=11 THEN 860
+// Check if player has reached the tenth year (11).
+// If so, go to win text.
+
+// Buy land.
+
 310 C=INT(10*RND(1)):Y=C+17
+// Calculate land price Y (17 to 26)
+
 312 PRINT "LAND IS TRADING AT"Y"BUSHELS PER ACRE."
 320 PRINT "HOW MANY ACRES DO YOU WISH TO BUY";
+// Print land price and query how much to buy.
+
 321 INPUT Q:IF Q<0 THEN 850
+// Store amount to buy in variable Q. If Q is less than 0, go to rejection text and end game.
+
 322 IF Y*Q<=S THEN 330
+// If land price times amount to buy is less than stored bushels, The player can afford to buy the land.
+
 323 GOSUB 710
+// Else go to not enough bushels sub routine.
+
 324 GOTO 320
+// Retry purchase.
+
 330 IF Q=0 THEN 340
+// if amount to buy is 0, go to sell land.
+
 331 A=A+Q:S=S-Y*Q:C=0
 334 GOTO 400
+// Else increase owned land and decrease stored bushels. Set price to 0.
+// Skip selling land
+
 340 PRINT "HOW MANY ACRES DO YOU WISH TO SELL";
 341 INPUT Q:IF Q<0 THEN 850
 342 IF Q<A THEN 350
@@ -117,16 +141,25 @@
 565 PRINT "DUE TO THIS EXTREME MISMANAGEMENT YOU HAVE NOT ONLY"
 566 PRINT "BEEN IMPEACHED AND THROWN OUT OF OFFICE BUT YOU HAVE"
 567 PRINT "ALSO BEEN DECLARED 'NATIONAL FINK' !!":GOTO 990
+
+// Subroutine. not enough bushels. 
 710 PRINT "HAMURABI:  THINK AGAIN. YOU HAVE ONLY"
 711 PRINT S"BUSHELS OF GRAIN. NOW THEN,"
 712 RETURN
+
+
 720 PRINT "HAMURABI:  THINK AGAIN. YOU OWN ONLY"A"ACRES. NOW THEN,"
 730 RETURN
 800 C=INT(RND(1)*5)+1
 801 RETURN
+
+// Rejection text.
+
 850 PRINT:PRINT "HAMURABI:  I CANNOT DO WHAT YOU WISH."
 855 PRINT "GET YOURSELF ANOTHER STEWARD!!!!!"
 857 GOTO 990
+
+
 860 PRINT "IN YOUR 10-YEAR TERM OF OFFICE,"P1"PERCENT OF THE"
 862 PRINT "POPULATION STARVED PER YEAR ON AVERAGE, I.E., A TOTAL OF"
 865 PRINT D1"PEOPLE DIED!!":L=A/P
