@@ -125,31 +125,75 @@ Retry sale.
 430 S=S-Q:C=1:PRINT
 // Else decrease stored bushels and increase stored bushels. Set price to 1.
 
+// Plant
+
 440 PRINT "HOW MANY ACRES DO YOU WISH TO PLANT WITH SEED";
 441 INPUT D:IF D=0 THEN 511
+// Store amount to plant in D. If D = 0, Set C to random 1 to 6
+
 442 IF D<0 THEN 850
+If D is less than 0, go to rejection text and end game.
+
 444 REM *** TRYING TO PLANT MORE ACRES THAN YOU OWN?
 445 IF D<=A THEN 450
+// If D is less or equal to the amount of owned land, go through with planting.
+
 446 GOSUB 720
+// Else go to not enough land sub routine.
+
 447 GOTO 440
+// Retry planting.
+
 449 REM *** ENOUGH GRAIN FOR SEED?
 450 IF INT(D/2)<S THEN 455
+// Use 1/2 bushels per acre. Check if enough in storage. 
+
 452 GOSUB 710
+// Else go to not enough bushels sub routine.
+
 453 GOTO 440
+// Retry planting.
+
 454 REM *** ENOUGH PEOPLE TO TEND THE CROPS?
 455 IF D<10*P THEN 510
+// Use 1/10 people per acre. Check if enough population. 
+
 460 PRINT "BUT YOU HAVE ONLY"P"PEOPLE TO TEND THE FIELDS. NOW THEN,"
 470 GOTO 440
+// Retry planting.
+
 510 S=S-INT(D/2)
+// Else decrease stored bushels.
+
+// Harvest.
+
 511 GOSUB 800
+// Set C to random 1 to 6
+
 512 REM *** A BOUNTYFULL HARVEST!!
 515 Y=C:H=D*Y:E=0
+// Set harvest per acre to random value stored in C.
+// Set harvest to harvest per acre * number of acres planted.
+// Set bushels eaten by rats to 0.
+
 521 GOSUB 800
+// Set C to random 1 to 6
+
 522 IF INT(C/2)<>C/2 THEN 530
+// Calculate a probability of 50% ?
+
 523 REM *** THE RATS ARE RUNNING WILD!!
 525 E=INT(S/C)
+// If 50%, calculate bushels eaten by rats and store to E.
+
 530 S=S-E+H
+// Add harvest to stored bushels minus bushels eaten by rats.
+
+// Population
+
 531 GOSUB 800
+// Set C to random 1 to 6
+
 532 REM *** LET'S HAVE SOME BABIES
 533 I=INT(C*(20*A+S)/P/100+1)
 539 REM *** HOW MANY PEOPLE HAD FULL TUMMIES?
@@ -175,7 +219,7 @@ Retry sale.
 720 PRINT "HAMURABI:  THINK AGAIN. YOU OWN ONLY"A"ACRES. NOW THEN,"
 730 RETURN
 
-// Subroutine. ?
+// Subroutine. Set C to random (1 - 6)
 800 C=INT(RND(1)*5)+1
 801 RETURN
 
