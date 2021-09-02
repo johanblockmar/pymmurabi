@@ -123,7 +123,7 @@ Retry sale.
 // Retry feed order.
 
 430 S=S-Q:C=1:PRINT
-// Else decrease stored bushels and increase stored bushels. Set price to 1.
+// Else decrease stored bushels. Set price to 1.
 
 // Plant
 
@@ -196,15 +196,33 @@ If D is less than 0, go to rejection text and end game.
 
 532 REM *** LET'S HAVE SOME BABIES
 533 I=INT(C*(20*A+S)/P/100+1)
+// calculate population increase: int(random value C *(20 * acres + stored bushels) / population / 100) + 1
+
 539 REM *** HOW MANY PEOPLE HAD FULL TUMMIES?
 540 C=INT(Q/20)
+C = number of fed people calculated from bushels as food / 20. Every pop should eat 20 bushels in a year.
+
 541 REM *** HORRORS, A 15% CHANCE OF PLAGUE
 542 Q=INT(10*(2*RND(1)-.3))
+This calculates a number between -3 and 17. This gives 15% when compared to 0 on line 227
+
 550 IF P<C THEN 210
+if there is more fed people than total people, this means no starvation. Run next turn.
+
 551 REM *** STARVE ENOUGH FOR IMPEACHMENT?
 552 D=P-C:IF D>.45*P THEN 560
+// D is starved people. Calculated from total people - fed people.
+// If starved people is greater than 45% of total people. Go to game over.
+
 553 P1=((Z-1)*P1+D*100/P)/Z
+// Calculate the averge starved people per year in percent.
+
 555 P=C:D1=D1+D:GOTO 215
+// Update population to equal fed people. Add starved people to total of starved people.
+// Go to next turn.
+
+// Game over due to starvation.
+
 560 PRINT:PRINT "YOU STARVED"D"PEOPLE IN ONE YEAR!!!"
 565 PRINT "DUE TO THIS EXTREME MISMANAGEMENT YOU HAVE NOT ONLY"
 566 PRINT "BEEN IMPEACHED AND THROWN OUT OF OFFICE BUT YOU HAVE"
@@ -229,28 +247,39 @@ If D is less than 0, go to rejection text and end game.
 855 PRINT "GET YOURSELF ANOTHER STEWARD!!!!!"
 857 GOTO 990
 
+// Win
 
 860 PRINT "IN YOUR 10-YEAR TERM OF OFFICE,"P1"PERCENT OF THE"
 862 PRINT "POPULATION STARVED PER YEAR ON AVERAGE, I.E., A TOTAL OF"
 865 PRINT D1"PEOPLE DIED!!":L=A/P
 870 PRINT "YOU STARTED WITH 10 ACRES PER PERSON AND ENDED WITH"
 875 PRINT L"ACRES PER PERSON.":PRINT
+// L is acres per person.
+
+// Different text depending on performance in starvation and acres per person..
+
 880 IF P1>33 THEN 565
 885 IF L<7 THEN 565
 890 IF P1>10 THEN 940
 892 IF L<9 THEN 940
 895 IF P1>3 THEN 960
 896 IF L<10 THEN 960
+
 900 PRINT "A FANTASTIC PERFORMANCE!!!  CHARLEMANGE, DISRAELI, AND"
 905 PRINT "JEFFERSON COMBINED COULD NOT HAVE DONE BETTER!":GOTO 990
+
 940 PRINT "YOUR HEAVY-HANDED PERFORMANCE SMACKS OF NERO AND IVAN IV."
 945 PRINT "THE PEOPLE (REMAINING) FIND YOU AN UNPLEASANT RULER, AND,"
 950 PRINT "FRANKLY, HATE YOUR GUTS!":GOTO 990
+
 960 PRINT "YOUR PERFORMANCE COULD HAVE BEEN SOMEWHAT BETTER, BUT"
 965 PRINT "REALLY WASN'T TOO BAD AT ALL. ";
 966 PRINT INT(P*.8*RND(1));"PEOPLE WOULD"
 970 PRINT "DEARLY LIKE TO SEE YOU ASSASSINATED BUT WE ALL HAVE OUR"
 975 PRINT "TRIVIAL PROBLEMS."
+
+// Ending text
+
 990 PRINT:FOR N=1 TO 10:PRINT CHR;:NEXT N
 995 PRINT "SO LONG FOR NOW.":PRINT
 999 END
