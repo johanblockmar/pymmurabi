@@ -1,4 +1,4 @@
-
+import random
 
 ## defines.
 
@@ -13,15 +13,15 @@ def main():
     print("SUCCESSFULLY FOR A TEN-YEAR TERM OF OFFICE.\n")
     
     ## Initialize variables
-    starvedPopTotal = 0
-    avgStarvedPerYearPercent = 0
+    popStarveTotal = 0
+    popStarveTotalAvgPercent = 0
     pop = 95
-    storedBushels = 2800
-    harvest = 3000
-    bushelsEatenByRats = harvest - storedBushels
+    bushelsStored = 2800
+    bushelsHarvest = 3000
+    bushelsEatenByRats = bushelsHarvest - bushelsStored
 
-    harvestPerAcre = 3
-    N_Acres = harvest / harvestPerAcre
+    bushelsHarvestPerAcre = 3
+    acres = int(bushelsHarvest / bushelsHarvestPerAcre)
     popIncrease = 5
     plague = 1
     popStarved = 0
@@ -38,6 +38,20 @@ def main():
 
             print("A HORRIBLE PLAGUE STRUCK!  HALF THE PEOPLE DIED.")
             print("POPULATION IS NOW {0}".format(pop))
+
+        print("THE CITY NOW OWNS {0} ACRES.".format(acres))
+        print("YOU HARVESTED {0} BUSHELS PER ACRE.".format(bushelsHarvestPerAcre))
+        print("RATS ATE {0} BUSHELS.".format(bushelsEatenByRats))
+        print("YOU NOW HAVE {0} BUSHELS IN STORE.\n".format(bushelsStored))
+
+        acrePrice = int( random.randint(17,27) )
+
+        print("LAND IS TRADING AT {0} BUSHELS PER ACRE.".format(acrePrice))
+        print("HOW MANY ACRES DO YOU WISH TO BUY")
+
+
+
+
 
         input()
 
