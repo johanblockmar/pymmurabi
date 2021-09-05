@@ -25,6 +25,7 @@ def main():
     popIncrease = 5
     plague = 1
     popStarved = 0
+    gameOver = False
 
     for year in range(TOTAL_YEARS):
         # Report.
@@ -47,14 +48,70 @@ def main():
         acrePrice = int( random.randint(17,27) )
 
         print("LAND IS TRADING AT {0} BUSHELS PER ACRE.".format(acrePrice))
-        print("HOW MANY ACRES DO YOU WISH TO BUY")
+        
+        buying = True
+        selling = False
+        while(buying):
+            print("HOW MANY ACRES DO YOU WISH TO BUY")
+            acresToBuy = int(input())
+
+            if(acresToBuy < 0):
+                printGameOver()
+                gameOver = True
+                buying = False
+                break
+
+            elif(acresToBuy > 0):
+                if(acresToBuy * acrePrice <= bushelsStored):
+                    acres += acresToBuy
+                    bushelsStored -= acresToBuy * acrePrice
+                    buying = False
+            
+                else:
+                    printNotEnoughBushels(bushelsStored)
+
+            else:
+                buying = False
+                selling = True
+
+        if(gameOver):
+            break
+
+        while(selling):
+            print("HOW MANY ACRES DO YOU WISH TO SELL")
+            acresToSell = int(input())
+
+            if(acresToSell < 0):
+                printGameOver()
+                gameOver = True
+                selling = False
+                break
+
+            else:
+                if(acresToSell <= acres):
+                    acres -= acresToSell
+                    bushelsStored += acresToSell * acrePrice
+                    selling = False
+
+                else:
+                    printNotEnoughAcres(acres)
+
+        if(gameOver):
+            break
 
 
 
+def printGameOver():
+    print("\nHAMURABI:  I CANNOT DO WHAT YOU WISH.")
+    print("GET YOURSELF ANOTHER STEWARD!!!!!")
 
 
-        input()
+def printNotEnoughBushels(bushels):
+    print("HAMURABI:  THINK AGAIN. YOU HAVE ONLY")
+    print( "{0} BUSHELS OF GRAIN. NOW THEN,".format(bushels))
 
+def printNotEnoughAcres(acres):
+    print("HAMURABI:  THINK AGAIN. YOU OWN ONLY {0} ACRES. NOW THEN,".format(acres))
 
 
 if __name__ == "__main__":
