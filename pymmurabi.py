@@ -159,6 +159,20 @@ def main():
         if(gameOver):
             break
 
+        ## Harvest.
+
+        bushelsHarvestPerAcre = random.randint(1,6)
+        bushelsHarvest = bushelsHarvestPerAcre * acresToPlant
+        bushelsEatenByRats = 0
+
+        # 50% chance of rats
+        if(random.randint(0,1) == 0):
+            bushelsEatenByRats = int(bushelsStored / random.randint(1,6))
+
+        bushelsStored = bushelsStored - bushelsEatenByRats + bushelsHarvest
+
+
+
 def printGameOver():
     print("\nHAMURABI:  I CANNOT DO WHAT YOU WISH.")
     print("GET YOURSELF ANOTHER STEWARD!!!!!")
