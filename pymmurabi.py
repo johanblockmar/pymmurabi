@@ -39,8 +39,8 @@ def main():
             pop = int(pop / 2)
 
             print("A HORRIBLE PLAGUE STRUCK!  HALF THE PEOPLE DIED.")
-            print("POPULATION IS NOW {0}".format(pop))
 
+        print("POPULATION IS NOW {0}".format(pop))
         print("THE CITY NOW OWNS {0} ACRES.".format(acres))
         print("YOU HARVESTED {0} BUSHELS PER ACRE.".format(bushelsHarvestPerAcre))
         print("RATS ATE {0} BUSHELS.".format(bushelsEatenByRats))
