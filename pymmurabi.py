@@ -24,6 +24,7 @@ def main():
     acres = int(bushelsHarvest / bushelsHarvestPerAcre)
     popIncrease = 5
     plague = 100
+
     popStarved = 0
     gameOver = False
 
@@ -193,6 +194,38 @@ def main():
 
         if(gameOver):
             break
+
+    acresPerPop = acres / pop
+    print("IN YOUR 10-YEAR TERM OF OFFICE, {0} PERCENT OF THE".format(popStarveTotalAvgPercent))
+    print("POPULATION STARVED PER YEAR ON AVERAGE, I.E., A TOTAL OF")
+    print("{0} PEOPLE DIED!!".format(popStarveTotal))
+    print("YOU STARTED WITH 10 ACRES PER PERSON AND ENDED WITH")
+    print("{0} ACRES PER PERSON.\n".format(acresPerPop))
+
+    if(popStarveTotalAvgPercent > 33 or acresPerPop < 7):
+        print("DUE TO THIS EXTREME MISMANAGEMENT YOU HAVE NOT ONLY")
+        print("BEEN IMPEACHED AND THROWN OUT OF OFFICE BUT YOU HAVE")
+        print("ALSO BEEN DECLARED 'NATIONAL FINK' !!")
+
+    elif(popStarveTotalAvgPercent > 10 or acresPerPop < 9):
+        print("YOUR HEAVY-HANDED PERFORMANCE SMACKS OF NERO AND IVAN IV.")
+        print("THE PEOPLE (REMAINING) FIND YOU AN UNPLEASANT RULER, AND,")
+        print("FRANKLY, HATE YOUR GUTS!")
+
+    elif(popStarveTotalAvgPercent > 3 or acresPerPop < 10):
+        print("YOUR PERFORMANCE COULD HAVE BEEN SOMEWHAT BETTER, BUT")
+        print("REALLY WASN'T TOO BAD AT ALL. ")
+        print("{0} PEOPLE WOULD".format(int(pop * 0.8*random.random()) ))
+        print("DEARLY LIKE TO SEE YOU ASSASSINATED BUT WE ALL HAVE OUR")
+        print("TRIVIAL PROBLEMS.")
+
+    else:
+        print("A FANTASTIC PERFORMANCE!!!  CHARLEMANGE, DISRAELI, AND")
+        print("JEFFERSON COMBINED COULD NOT HAVE DONE BETTER!")
+    
+    ## Ending text
+    for i in range(10):
+        print("SO LONG FOR NOW.\n")
 
 def printGameOver():
     print("\nHAMURABI:  I CANNOT DO WHAT YOU WISH.")
