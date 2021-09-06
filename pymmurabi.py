@@ -23,7 +23,7 @@ def main():
     bushelsHarvestPerAcre = 3
     acres = int(bushelsHarvest / bushelsHarvestPerAcre)
     popIncrease = 5
-    plague = 1
+    plague = 100
     popStarved = 0
     gameOver = False
 
@@ -171,12 +171,38 @@ def main():
 
         bushelsStored = bushelsStored - bushelsEatenByRats + bushelsHarvest
 
+        ## Population
 
+        popIncrease = int( random.randint(1,6) * (20 * acres + bushelsStored) / pop / 100 ) + 1
+
+        popFed = int(bushelsToFeedPop / 20)
+
+        plague = random.randint(0,99)
+
+        popStarved = 0
+        if(pop > popFed):
+            popStarved = pop - popFed
+            if(popStarved > 0.45 * pop):
+                printGameOverStarvation(popStarved)
+                gameOver = True
+
+            else:
+                popStarveTotalAvgPercent = ( (year - 1) * popStarveTotalAvgPercent + popStarved * 100 / pop ) / year
+                pop = popFed
+                popStarveTotal += popStarved
+
+        if(gameOver):
+            break
 
 def printGameOver():
     print("\nHAMURABI:  I CANNOT DO WHAT YOU WISH.")
     print("GET YOURSELF ANOTHER STEWARD!!!!!")
 
+def printGameOverStarvation(starved):
+    print("\nYOU STARVED {0} PEOPLE IN ONE YEAR!!!".format(starved))
+    print("DUE TO THIS EXTREME MISMANAGEMENT YOU HAVE NOT ONLY")
+    print("BEEN IMPEACHED AND THROWN OUT OF OFFICE BUT YOU HAVE")
+    print("ALSO BEEN DECLARED 'NATIONAL FINK' !!")
 
 def printNotEnoughBushels(bushels):
     print("HAMURABI:  THINK AGAIN. YOU HAVE ONLY")
