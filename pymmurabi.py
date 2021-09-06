@@ -50,7 +50,7 @@ def main():
         print("LAND IS TRADING AT {0} BUSHELS PER ACRE.".format(acrePrice))
         
         ## Buy land
-
+        
         buying = True
         selling = False
         while(buying):
@@ -127,6 +127,37 @@ def main():
         if(gameOver):
             break
 
+        ## Planting
+        
+        planting = True
+        while(planting):
+            print("HOW MANY ACRES DO YOU WISH TO PLANT WITH SEED")
+            acresToPlant = int(input())
+
+            if(acresToPlant < 0):
+                printGameOver()
+                gameOver = True
+                planting = False
+                break
+            else:
+                if(acresToPlant <= acres):
+                    if(int(acresToPlant/2) < bushelsStored):
+                        if(acresToPlant < 10* pop):
+                            bushelsStored -= int(acresToPlant / 2)
+                            planting = False
+                        
+                        else:
+                            print("BUT YOU HAVE ONLY {0} PEOPLE TO TEND THE FIELDS. NOW THEN,".format(pop))
+
+                    else:
+                        printNotEnoughBushels(bushelsStored)
+
+                else:
+                    printNotEnoughAcres(acres)
+
+
+        if(gameOver):
+            break
 
 def printGameOver():
     print("\nHAMURABI:  I CANNOT DO WHAT YOU WISH.")
