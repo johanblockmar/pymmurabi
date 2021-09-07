@@ -56,7 +56,7 @@ def main():
         selling = False
         while(buying):
             print("HOW MANY ACRES DO YOU WISH TO BUY")
-            acresToBuy = int(input())
+            acresToBuy = getIntInput()
 
             if(acresToBuy < 0):
                 printGameOver()
@@ -84,7 +84,7 @@ def main():
 
         while(selling):
             print("HOW MANY ACRES DO YOU WISH TO SELL")
-            acresToSell = int(input())
+            acresToSell = getIntInput()
 
             if(acresToSell < 0):
                 printGameOver()
@@ -109,7 +109,7 @@ def main():
         feeding = True
         while(feeding):
             print("\nHOW MANY BUSHELS DO YOU WISH TO FEED YOUR PEOPLE")
-            bushelsToFeedPop = int(input())
+            bushelsToFeedPop = getIntInput()
 
             if(bushelsToFeedPop < 0):
                 printGameOver()
@@ -133,7 +133,7 @@ def main():
         planting = True
         while(planting):
             print("HOW MANY ACRES DO YOU WISH TO PLANT WITH SEED")
-            acresToPlant = int(input())
+            acresToPlant = getIntInput()
 
             if(acresToPlant < 0):
                 printGameOver()
@@ -246,6 +246,13 @@ def printNotEnoughBushels(bushels):
 def printNotEnoughAcres(acres):
     print("HAMURABI:  THINK AGAIN. YOU OWN ONLY {0} ACRES. NOW THEN,".format(acres))
 
+def getIntInput():
+    while(True):
+        try:
+            i=int(input())
+            return i
+        except Exception as e:
+            print("FORGIVE ME, WHAT WAS THAT?")
 
 if __name__ == "__main__":
     main()
