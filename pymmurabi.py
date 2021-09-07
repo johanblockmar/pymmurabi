@@ -205,11 +205,11 @@ def main():
 
     if(not gameOver):
         acresPerPop = acres / pop
-        print("IN YOUR 10-YEAR TERM OF OFFICE, {0} PERCENT OF THE".format(popStarveTotalAvgPercent))
+        print("IN YOUR 10-YEAR TERM OF OFFICE, {0:.1f} PERCENT OF THE".format(popStarveTotalAvgPercent))
         print("POPULATION STARVED PER YEAR ON AVERAGE, I.E., A TOTAL OF")
         print("{0} PEOPLE DIED!!".format(popStarveTotal))
         print("YOU STARTED WITH 10 ACRES PER PERSON AND ENDED WITH")
-        print("{0} ACRES PER PERSON.\n".format(acresPerPop))
+        print("{0:.1f} ACRES PER PERSON.\n".format(acresPerPop))
 
         if(popStarveTotalAvgPercent > 33 or acresPerPop < 7):
             print("DUE TO THIS EXTREME MISMANAGEMENT YOU HAVE NOT ONLY")
