@@ -4,6 +4,11 @@ import random
 
 TOTAL_YEARS = 10
 PLAGUE_CHANCE = 15
+POP_INIT = 95
+POP_I_INIT = 5
+BUSHELS_STORED_INIT = 2800
+BUSHELS_HARVEST_INIT = 3000
+BUSHELS_HARVEST_PER_ACRE_INIT = 3
 
 def main():
     print("                HAMURABI")
@@ -13,19 +18,22 @@ def main():
     print("SUCCESSFULLY FOR A TEN-YEAR TERM OF OFFICE.\n")
     
     ## Initialize variables
-    popStarveTotal = 0
-    popStarveTotalAvgPercent = 0
-    pop = 95
-    bushelsStored = 2800
-    bushelsHarvest = 3000
-    bushelsEatenByRats = bushelsHarvest - bushelsStored
+    pop = POP_INIT
+    popIncrease = POP_I_INIT
 
-    bushelsHarvestPerAcre = 3
+    bushelsStored = BUSHELS_STORED_INIT
+    bushelsHarvest = BUSHELS_HARVEST_INIT
+    bushelsEatenByRats = bushelsHarvest - bushelsStored
+    bushelsHarvestPerAcre = BUSHELS_HARVEST_PER_ACRE_INIT
     acres = int(bushelsHarvest / bushelsHarvestPerAcre)
-    popIncrease = 5
+    
+    # No plague first year.
     plague = 100
 
     popStarved = 0
+    popStarveTotal = 0
+    popStarveTotalAvgPercent = 0
+    
     gameOver = False
 
     for year in range(1,TOTAL_YEARS+1):
