@@ -264,3 +264,6 @@ def getIntInput():
 
 if __name__ == "__main__":
     main()
+
+    print("PRESS ANY KEY TO END")
+    input()
